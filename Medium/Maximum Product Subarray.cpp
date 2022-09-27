@@ -2,16 +2,18 @@
 ---LINK--- https://leetcode.com/problems/maximum-subarray/
 */
 
-  int maxSubArray(vector<int>& nums) {
-        int currSum=0,maxSum=INT_MIN;
-        for(int i=0; i<nums.size(); i++){
-           currSum+=nums[i];
-            if(currSum>maxSum){
-                maxSum=currSum;
-            }
-            if(currSum<0){
-                currSum=0;
-            }
-        }
-        return maxSum;
+   int maxProduct(vector<int>& nums) {
+      int ans = nums[0];
+      int ma = ans;
+      int mi = ans;
+      int n=nums.size();
+      for(int i=1; i<n; i++){
+         if(nums[i]<0){
+           swap(ma,mi);  
+         } 
+         ma = max(nums[i],ma*nums[i]);
+         mi = min(nums[i],mi*nums[i]);
+         ans = max(ans,ma); 
+      }
+      return ans;  
     }
